@@ -14,10 +14,24 @@ namespace Gazi.HelloWindowsAppBLG
     {
         int skor = 0;
         int sure = 3;
-        public frmOyun(string ad,string soyad)
+        public frmOyun(string ad,string soyad,string seviye)
         {
             InitializeComponent();          
             lblOyuncu.Text = $"Hoşgeldin,{ad} {soyad}";
+            switch (seviye)
+            {
+                case "Kolay":
+                    this.Size = new Size(300, 300);
+                    break;
+                case "Orta":
+                    this.Size = new Size(500, 500);
+                    break;
+                case "Zor":
+                    this.Size = new Size(800, 800);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void btnYakala_MouseMove(object sender, MouseEventArgs e)
