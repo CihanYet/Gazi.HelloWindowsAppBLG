@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,25 +10,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gazi.HelloWindowsAppBLG
-{
+{    
+
     public partial class frmOyun : Form
     {
         int skor = 0;
         int sure = 3;
-        public frmOyun(string ad,string soyad,string seviye)
+        public frmOyun(GameInfo info)
         {
-            InitializeComponent();          
-            lblOyuncu.Text = $"Hoşgeldin,{ad} {soyad}";
-            switch (seviye)
+            InitializeComponent();
+            lblOyuncu.Text = $"Hoşgeldin,{info.Ad} {info.Soyad}";
+            switch (info.Level)
             {
-                case "Kolay":
+                case Seviye.Kolay:
                     this.Size = new Size(300, 300);
+                    sure = 20;
+                    btnYakala.Size = new Size(100, 100);
                     break;
-                case "Orta":
+                case Seviye.Orta:
                     this.Size = new Size(500, 500);
+                    sure = 10;
+                    btnYakala.Size = new Size(50, 50);
                     break;
-                case "Zor":
+                case Seviye.Zor:
                     this.Size = new Size(800, 800);
+                    sure = 5;
+                    btnYakala.Size = new Size(20, 20);
                     break;
                 default:
                     break;
@@ -47,13 +55,12 @@ namespace Gazi.HelloWindowsAppBLG
             }
             var rnd = new Random();
             btn.Location = new Point(rnd.Next(this.ClientSize.Width - btn.Width - pnlBilgi.Width), rnd.Next(this.ClientSize.Height - btn.Height));
-
             lblSkor.Text = skor.ToString();
-            if (skor == 5)
+            if (skor % 5 == 0)
             {
                 var btn2 = new Button();
                 btn2.Size = new Size(50, 50);
-                btn2.Location = new Point(0, 0);
+                btn2.Location = new Point(rnd.Next(this.ClientSize.Width - btn.Width - pnlBilgi.Width), rnd.Next(this.ClientSize.Height - btn.Height));
                 btn2.Name = "btnEksi";
                 btn2.MouseMove += btnYakala_MouseMove;
                 btn2.BackColor = Color.Red;

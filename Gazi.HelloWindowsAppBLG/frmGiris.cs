@@ -25,26 +25,28 @@ namespace Gazi.HelloWindowsAppBLG
             }
             else
             {
-                string seviye;
-                
+                Seviye seviye;
+
                 if (rdKolay.Checked)
                 {
-                    seviye = "Kolay";
+                    seviye = Seviye.Kolay;
                 }
                 else if (rdOrta.Checked)
                 {
-                    seviye = "Orta";
+                    seviye = Seviye.Orta;
                 }
-                else if(rdZor.Checked)
+                else if (rdZor.Checked)
                 {
-                    seviye = "Zor";
+                    seviye = Seviye.Zor;
                 }
                 else
                 {
                     MessageBox.Show("Seviye Seçiniz.");
                     return;
                 }
-                frmOyun frm = new frmOyun(txtAd.Text, txtSoyad.Text,seviye);
+
+
+                frmOyun frm = new frmOyun(new GameInfo(txtAd.Text, txtSoyad.Text, seviye));
                 frm.ShowDialog();
             }
         }
